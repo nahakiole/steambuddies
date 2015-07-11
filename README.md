@@ -1,5 +1,7 @@
 # Steambuddies
 
+![Preview](http://i.imgur.com/fBTxutS.png)
+
 A tool to find games to play with your buddies.
 
 WIP and at the moment no online.
