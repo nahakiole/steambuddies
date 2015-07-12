@@ -4,7 +4,7 @@
 
 A tool to find games to play with your buddies.
 
-WIP and at the moment no online.
+WIP and not yet online.
 
 ## Contributing
 
