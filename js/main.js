@@ -1,10 +1,11 @@
 var app = angular.module('steamBuddies', []);
-app.controller('mainController', function($scope) {
+app.controller('mainController', [ 'steamBuddies', '$scope', function(steamBuddies,$scope) {
     $scope.LOCAL_MODE = 'local';
     $scope.ONLINE_MODE = 'online';
     $scope.MAX_PLAYER_NUMBER = 8;
 
     $scope.activeSlide = 0;
+    $scope.gamename = '';
 
     $scope.playerNumber = 1;
     $scope.playerNumberString = [
@@ -46,6 +47,9 @@ app.controller('mainController', function($scope) {
         $scope.currentPlayerName = "";
         if ($scope.players.length == $scope.playerNumber){
             $scope.nextSlide();
+            steamBuddies.getGames($scope.players).then(function(d) {
+                $scope.gamename = d.name;
+            });
         }
     };
 
@@ -56,4 +60,17 @@ app.controller('mainController', function($scope) {
     $scope.goToSlide = function(slide){
         $scope.activeSlide = slide;
     };
-});
+
+
+}] ).factory('steamBuddies', function($http) {
+    return {
+        getGames: function (friends) {
+            return $http.post('/findmatches', {steam: friends}).then(function (response) {
+              // The then function here is an opportunity to modify the response
+              console.log(response);
+              // The return value gets picked up by the then in the controller.
+              return response.data;
+            });
+        }
+    };
+});;

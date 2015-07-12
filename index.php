@@ -31,8 +31,12 @@ $app->post(
     '/findmatches', function (\Silex\Application $app) {
     try {
 
+        $post = json_decode(file_get_contents("php://input"), true);
 
-        $users = $app['request']->request->get('steam');
+        if (!isset($post['steam'])){
+            return new \Symfony\Component\HttpFoundation\JsonResponse('Provide at least one player!');
+        }
+        $users = $post['steam'];
 
         $gameCollections = [];
         foreach ($users as $user) {
@@ -55,17 +59,13 @@ $app->post(
         };
 
         $games3 = call_user_func_array('array_uintersect_assoc', $gameCollections);
+        $randomGame = $games3[array_rand($games3)];
 
-        $return = array();
-        foreach ($games3 as $game) {
-            $return[] = array(
-                'name'  => $game->getName(),
-                'store' => $game->getStoreUrl(),
-                'image' => $game->getLogoUrl()
-            );
-        }
-
-        return new \Symfony\Component\HttpFoundation\JsonResponse($return);
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array(
+            'name'  => $randomGame->getName(),
+            'store' => $randomGame->getStoreUrl(),
+            'image' => $randomGame->getLogoUrl()
+        ));
     } catch (Exception $e) {
 
         return new \Symfony\Component\HttpFoundation\JsonResponse('Error');
