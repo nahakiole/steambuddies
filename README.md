@@ -4,7 +4,7 @@
 
 A tool to find games to play with your buddies.
 
-WIP and not yet online.
+WIP: http://steambuddies.robinglauser.ch/
 
 ## Contributing
 
