@@ -38,6 +38,17 @@ $app->post(
         }
         $users = $post['steam'];
 
+        if (count($users) == 1){
+            $id = SteamId::create(current($users));
+            $singleGames = $id->getGames();
+            $randomGame = $singleGames[array_rand($singleGames)];
+            return new \Symfony\Component\HttpFoundation\JsonResponse(array(
+                'name'  => $randomGame->getName(),
+                'store' => $randomGame->getStoreUrl(),
+                'image' => $randomGame->getLogoUrl()
+            ));
+        }
+
         $gameCollections = [];
         foreach ($users as $user) {
             $id = SteamId::create($user);

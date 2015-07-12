@@ -50,7 +50,6 @@
 
 <div class="youshouldplay slide slide-3" data-ng-class="activeSlide == 3 ? 'active' : ''">
     <div class="container">
-        <h1>You should play</h1>
 
         <div class="spinner" data-ng-hide="gamename != ''">
             <div class="rect1"></div>
@@ -59,9 +58,12 @@
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
+        <div  data-ng-hide="gamename == ''">
+        <h1>You should play</h1>
         <p class="game loaded">
             {{ gamename }}
         </p>
+        </div>
     </div>
 
 </div>
