@@ -423,7 +423,7 @@ p {
 }
 @media (min-width: 1200px) {
     .container {
-        width: 1170px;
+        width: 1190px;
     }
 }
 
@@ -432,13 +432,14 @@ body{
 }
 
 .slide {
-    padding-top: 25vh;
-    height: 100vh;
+    padding-top: 20vh;
+    min-height: 100vh;
     width: 100vw;
     text-transform: uppercase;
     color: #fff;
     font-size: 150px;
     display: none;
+    margin:0;
 }
 
 .slide.active {
@@ -490,7 +491,7 @@ body{
     color: #3498db;
 }
 
-.youshouldplay{
+.youshouldplay {
     background: #40d47e;
 }
 
@@ -518,9 +519,9 @@ h1 small {
 
 
 .spinner {
-    margin: 0;
     width: 199px;
     font-size: 0;
+    margin:0 auto;
 }
 
 .spinner > div {
