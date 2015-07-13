@@ -18,13 +18,11 @@ $app->get(
 
 $app->get(
     '/category', function () {
-
     $id = SteamId::create('Raubritter');
     $gameCollections[] = $id->getGames();
     return '';
 }
 );
-
 
 
 $app->post(
@@ -33,20 +31,25 @@ $app->post(
 
         $post = json_decode(file_get_contents("php://input"), true);
 
-        if (!isset($post['steam'])){
+        if (!isset($post['steam'])) {
             return new \Symfony\Component\HttpFoundation\JsonResponse('Provide at least one player!');
         }
         $users = $post['steam'];
 
-        if (count($users) == 1){
+        if (count($users) == 1) {
             $id = SteamId::create(current($users));
+
+            /**
+             * @var $singleGames SteamGame[]
+             */
             $singleGames = $id->getGames();
             $randomGame = $singleGames[array_rand($singleGames)];
-            return new \Symfony\Component\HttpFoundation\JsonResponse(array(
-                'name'  => $randomGame->getName(),
-                'store' => $randomGame->getStoreUrl(),
-                'image' => $randomGame->getLogoUrl()
-            ));
+            return  new \Symfony\Component\HttpFoundation\JsonResponse(array('status' => 'success',
+                'response' => array(
+                    'name' => $randomGame->getName(),
+                    'store' => $randomGame->getStoreUrl(),
+                    'image' => $randomGame->getLogoUrl()
+                )));
         }
 
         $gameCollections = [];
@@ -72,15 +75,19 @@ $app->post(
         $games3 = call_user_func_array('array_uintersect_assoc', $gameCollections);
         $randomGame = $games3[array_rand($games3)];
 
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array(
-            'name'  => $randomGame->getName(),
-            'store' => $randomGame->getStoreUrl(),
-            'image' => $randomGame->getLogoUrl()
-        ));
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            array('status' => 'success',
+                'response' => array(
+                    'name' => $randomGame->getName(),
+                    'store' => $randomGame->getStoreUrl(),
+                    'image' => $randomGame->getLogoUrl()
+                )));
     } catch (Exception $e) {
-
-        return new \Symfony\Component\HttpFoundation\JsonResponse('Error');
-
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            array('status' => 'error',
+                'response' => $e->getMessage()
+            )
+        );
     }
 }
 );
