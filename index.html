@@ -68,9 +68,12 @@
             <div class="clearfix"></div>
             <a href="steam://run/{{ game.id }}" class="button">Play Game</a>
             <button data-ng-click="loadGame()">Not what you want? Find another game.</button>
+            <button data-ng-click="resetSystem()">Start over</button>
         </div>
-        <div data-ng-hide="error == ''">
+        <div data-ng-hide="error == ''" class="error-message">
             <h1>{{ error }}</h1>
+            <button data-ng-click="resetSystem()">Try again</button>
+            <div class="clearfix"></div>
         </div>
     </div>
 

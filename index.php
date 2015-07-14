@@ -49,6 +49,10 @@ $app->post(
                 return SteamCache::hasLocalMultiplayer($game->getAppId());
             });
 
+            if (count($localMultiplayerGames) == 0){
+                throw new Exception("No games found");
+            }
+
             $randomGame = $localMultiplayerGames[array_rand($localMultiplayerGames)];
             return new \Symfony\Component\HttpFoundation\JsonResponse(array('status' => 'success',
                 'response' => array(
@@ -84,6 +88,11 @@ $app->post(
         };
 
         $games3 = call_user_func_array('array_uintersect_assoc', $gameCollections);
+
+        if (count($games3) == 0){
+            throw new Exception("No games found");
+        }
+
         $randomGame = $games3[array_rand($games3)];
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(

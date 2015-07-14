@@ -14,6 +14,7 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
   $scope.lastGame = '';
   $scope.game = '';
 
+
   $scope.error = '';
 
   $scope.playerNumber = 1;
@@ -52,11 +53,11 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
   };
 
   $scope.loadGame = function () {
-    $scope.lastGame = $scope.game;
+    $scope.lastGame = $scope.game.id;
     $scope.game = '';
     $scope.error = '';
     steamBuddies.getGames($scope.players).then(function (d) {
-      if ($scope.lastGame == d) {
+      if ($scope.lastGame == d.id) {
         $scope.loadGame();
       }
       else {
@@ -82,6 +83,16 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
 
   $scope.goToSlide = function (slide) {
     $scope.activeSlide = slide;
+  };
+
+  $scope.resetSystem = function () {
+    $scope.activeSlide = 0;
+    $scope.lastGame = '';
+    $scope.game = '';
+    $scope.error = '';
+    $scope.playerNumber = 1;
+    $scope.players = [];
+    $scope.currentPlayerName = "";
   };
 
 
