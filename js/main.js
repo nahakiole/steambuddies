@@ -44,16 +44,22 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
     $scope.nextSlide();
   };
 
+  $scope.loadGame = function () {
+    $scope.game = '';
+    $scope.error = '';
+    steamBuddies.getGames($scope.players).then(function (d) {
+      $scope.game = d;
+    }, function (rejected) {
+      $scope.error = rejected;
+    });
+  };
+
   $scope.addPlayer = function (player) {
     $scope.players.push(player);
     $scope.currentPlayerName = "";
     if ($scope.players.length == $scope.playerNumber) {
       $scope.nextSlide();
-      steamBuddies.getGames($scope.players).then(function (d) {
-        $scope.game = d;
-      }, function (rejected) {
-        $scope.error = rejected;
-      });
+      $scope.loadGame();
     }
   };
 
@@ -69,10 +75,10 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
 }]).factory('steamBuddies', function ($http, $q) {
   return {
     getGames: function (friends) {
-      return $q(function(resolve, reject) {
+      return $q(function (resolve, reject) {
         $http.post('/findmatches', {steam: friends}).then(function (response) {
           console.log(response);
-          if (response.data.status == 'error'){
+          if (response.data.status == 'error') {
             reject(response.data.response);
           }
           else {
