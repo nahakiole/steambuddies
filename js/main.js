@@ -6,7 +6,7 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
   $scope.MAX_PLAYER_NUMBER = 8;
 
   $scope.activeSlide = 0;
-  $scope.gamename = '';
+  $scope.game = '';
   $scope.error = '';
 
   $scope.playerNumber = 1;
@@ -50,7 +50,7 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
     if ($scope.players.length == $scope.playerNumber) {
       $scope.nextSlide();
       steamBuddies.getGames($scope.players).then(function (d) {
-        $scope.gamename = d.name;
+        $scope.game = d;
       }, function (rejected) {
         $scope.error = rejected;
       });

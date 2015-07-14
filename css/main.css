@@ -496,8 +496,11 @@ body{
 }
 
 
-.youshouldplay .game {
+.youshouldplay .game a {
     font-size: 160px;
+    margin:0;
+    text-decoration: none;
+    color: #fff;
 }
 
 .youshouldplay button:hover,

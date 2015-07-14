@@ -15,7 +15,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
 </head>
 <body>
 
@@ -62,7 +61,9 @@
             <h1>You should play</h1>
 
             <p class="game loaded">
-                {{ gamename }}
+                <a href="{{ game.store }}" target="_blank">
+                    {{ game.name }}
+                </a>
             </p>
         </div>
         <div data-ng-hide="error == ''">
@@ -76,5 +77,4 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-<script src="js/angular-route.min.js"></script>
 <script src="js/main.js"></script>
