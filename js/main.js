@@ -1,12 +1,19 @@
 var app = angular.module('steamBuddies', []);
 
+app.config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|steam|mailto|file):/);
+}]);
+
 app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddies, $scope) {
   $scope.LOCAL_MODE = 'local';
   $scope.ONLINE_MODE = 'online';
   $scope.MAX_PLAYER_NUMBER = 8;
 
   $scope.activeSlide = 0;
+
+  $scope.lastGame = '';
   $scope.game = '';
+
   $scope.error = '';
 
   $scope.playerNumber = 1;
@@ -45,10 +52,16 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
   };
 
   $scope.loadGame = function () {
+    $scope.lastGame = $scope.game;
     $scope.game = '';
     $scope.error = '';
     steamBuddies.getGames($scope.players).then(function (d) {
-      $scope.game = d;
+      if ($scope.lastGame == d) {
+        $scope.loadGame();
+      }
+      else {
+        $scope.game = d;
+      }
     }, function (rejected) {
       $scope.error = rejected;
     });
@@ -77,7 +90,6 @@ app.controller('mainController', ['steamBuddies', '$scope', function (steamBuddi
     getGames: function (friends) {
       return $q(function (resolve, reject) {
         $http.post('/findmatches', {steam: friends}).then(function (response) {
-          console.log(response);
           if (response.data.status == 'error') {
             reject(response.data.response);
           }

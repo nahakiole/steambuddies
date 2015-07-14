@@ -52,6 +52,7 @@ $app->post(
             $randomGame = $localMultiplayerGames[array_rand($localMultiplayerGames)];
             return new \Symfony\Component\HttpFoundation\JsonResponse(array('status' => 'success',
                 'response' => array(
+                    'id' => $randomGame->getAppId(),
                     'name' => $randomGame->getName(),
                     'store' => $randomGame->getStoreUrl(),
                     'image' => $randomGame->getLogoUrl()
@@ -88,6 +89,7 @@ $app->post(
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             array('status' => 'success',
                 'response' => array(
+                    'id' => $randomGame->getAppId(),
                     'name' => $randomGame->getName(),
                     'store' => $randomGame->getStoreUrl(),
                     'image' => $randomGame->getLogoUrl()

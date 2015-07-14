@@ -9,7 +9,7 @@ html {
 
 body {
     margin: 0;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 
 article,
@@ -506,7 +506,7 @@ body {
 }
 
 .slide {
-    padding-top: 20vh;
+    padding-top: 15vh;
     min-height: 100vh;
     width: 100vw;
     text-transform: uppercase;
@@ -515,23 +515,30 @@ body {
     display: none;
     margin: 0;
     position: relative;
+    padding-bottom: 5vh;
 }
 
 .slide.active {
     display: block;
 }
 
-.slide button {
+.slide button,
+.slide .button {
     text-transform: uppercase;
     padding: 10px 15px;
     line-height: 140px;
     background: transparent;
     border: 5px solid #fff;
     color: #fff;
+    display: inline-block;
+    text-decoration: none;
 }
 
 .slide button:hover,
-.slide button:focus {
+.slide button:focus,
+.slide .button:hover,
+.slide .button:focus {
+    text-decoration: none;
     background: #fff;
 }
 
@@ -575,13 +582,18 @@ body {
     margin: 0;
     text-decoration: none;
     color: #fff;
+    display: block;
+}
+
+.youshouldplay .game.smaller-font a {
+    font-size: 120px;
+    line-height: 1;
 }
 
 .youshouldplay .off-canvas {
     opacity: 0;
     position: relative;
     bottom: -100vh;
-    line-height: 6;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
@@ -601,7 +613,6 @@ body {
 }
 
 .youshouldplay .off-canvas.slide-in {
-    line-height: 1.1;
     bottom: 0;
     opacity: 1;
 }
@@ -621,20 +632,25 @@ body {
 }
 
 .fade-out {
-    height:0;
+    height: 0;
     opacity: 0;
 }
 
 .youshouldplay button:hover,
-.youshouldplay button:focus {
+.youshouldplay button:focus,
+.youshouldplay .button:hover,
+.youshouldplay .button:focus {
     color: #40d47e;
 }
 
+.youshouldplay .button,
 .youshouldplay button {
     font-size: 20px;
     padding: 5px 10px;
     line-height: 2;
     display: block;
+    float: left;
+    margin-right: 15px;
 }
 
 h1 small {
@@ -650,7 +666,7 @@ h1 small {
 }
 
 .players input[type=text]:focus {
-    outline:none;
+    outline: none;
 }
 
 .spinner {
