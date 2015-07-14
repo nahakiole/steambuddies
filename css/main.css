@@ -662,6 +662,11 @@ body {
     font-size: 120px;
 }
 
+button,
+button:focus {
+    outline: none;
+}
+
 .youshouldplay .off-canvas {
     opacity: 0;
     position: relative;
