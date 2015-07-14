@@ -60,12 +60,13 @@
         <div data-ng-class="game != '' ? 'slide-in' : ''" class="off-canvas">
             <h1>You should play</h1>
 
-            <p class="game loaded">
-                <a href="{{ game.store }}" target="_blank">
+            <p class="game loaded" data-ng-class="game.name.length > 8 ? 'smaller-font' : ''">
+                <a href="{{ game.store }}" >
                     {{ game.name }}
                 </a>
             </p>
             <div class="clearfix"></div>
+            <a href="steam://run/{{ game.id }}" class="button">Play Game</a>
             <button data-ng-click="loadGame()">Not what you want? Find another game.</button>
         </div>
         <div data-ng-hide="error == ''">
