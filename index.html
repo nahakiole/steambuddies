@@ -65,11 +65,15 @@
                     {{ game.name }}
                 </a>
             </p>
+            <div class="clearfix"></div>
+            <button data-ng-click="loadGame()">Not what you want? Find another game.</button>
         </div>
         <div data-ng-hide="error == ''">
             <h1>{{ error }}</h1>
         </div>
     </div>
+
+    <div class="clearfix"></div>
 
 </div>
 
