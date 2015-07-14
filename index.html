@@ -51,13 +51,17 @@
 <div class="youshouldplay slide slide-3" data-ng-class="activeSlide == 3 ? 'active' : ''">
     <div class="container">
 
-        <div class="spinner fade" data-ng-class="(game != '' || error != '') ? 'fade-out' : 'fade-in'">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+        <div class="fade" data-ng-class="(game != '' || error != '') ? 'fade-out' : 'fade-in'">
+            <h1 style="text-align:center">Loading</h1>
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
         </div>
+
         <div data-ng-class="game != '' ? 'slide-in' : ''" class="off-canvas">
             <h1>You should play</h1>
 
@@ -66,6 +70,7 @@
                     {{ game.name }}
                 </a>
             </p>
+
             <div class="clearfix"></div>
             <a href="steam://run/{{ game.id }}" class="button">Play Game</a>
             <button data-ng-click="loadGame()">Not what you want? Find another game.</button>
